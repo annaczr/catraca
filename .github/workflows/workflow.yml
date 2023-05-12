@@ -26,4 +26,4 @@ jobs:
     - name: exec
       run: |
         cd src
-        java -cp . Testes.java
+        java -cp . Testes
