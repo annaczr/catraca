@@ -30,9 +30,19 @@ jobs:
     - uses: mr-smithers-excellent/docker-build-push@v6
       name: subindo no docker
       with:
-        image: annaczr/catraca
+        image: ${{secrets.DOCKER_USER}}/catraca
         tags: 1.0
         registry: docker.io
         dockerfile: dockerfile
-        username: ${{secrets.DOCKER_USER}}
-        password: ${{secrets.DOCKER_PASSWORD}}
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Version Tag Docker Image
+      uses: jacobsvante/version-tag-docker-image@v0.1.0
+      with:
+        # Manually provided semantic version (e.g: 0.3.4)
+        version: 1.0
+        docker-registry: docker.io
+        docker-username: ${{ secrets.DOCKER_USER }}
+        docker-password: ${{ secrets.DOCKER_PASSWORD }}
+        docker-image: ${{secrets.DOCKER_USER}}/catraca
+       
